@@ -1,0 +1,2 @@
+-r db/requirements.txt
+-r api/requirements.txt

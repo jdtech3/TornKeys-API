@@ -1,0 +1,14 @@
+# VS Code
+.vscode/
+
+# Compiled stuff
+*.pyc
+
+# pycache
+*/__pycache__/
+
+# PyCharm
+.idea/
+
+# DB
+db/*.sqlite
