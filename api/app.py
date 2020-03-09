@@ -8,12 +8,12 @@ from api.keys import ALLOWED_API_KEYS
 
 app = FlaskAPI(__name__)
 
-__version__ = '0.1.0-beta'
+__version__ = '0.1.1-beta'
 
 
 @app.route('/api')
 def home():
-    return 'TornKeys API v0.1.0-beta'
+    return f'TornKeys API {__version__}'
 
 
 @app.route('/api/get', methods=['GET'])
