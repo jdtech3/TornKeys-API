@@ -47,27 +47,30 @@ def get_info():
         return {'error': 'Invalid API key'}, HTTP_401_UNAUTHORIZED
 
 
-@app.route('/api/new', methods=['POST'])
+@app.route('/api/new', methods=['GET', 'POST'])
 def new_member():
-    args = flask.request.args
+    if flask.request.method == 'POST':
+        args = flask.request.args
 
-    if args.get('key') in ALLOWED_API_KEYS:
-        api_key = args.get('api_key')
-        try:
-            discord_id = int(args.get('discord_id'))
-            torn_id = int(args.get('torn_id'))
-        except ValueError:
-            return {'error': 'Discord ID and Torn ID must be int'}, HTTP_400_BAD_REQUEST
+        if args.get('key') in ALLOWED_API_KEYS:
+            api_key = args.get('api_key')
+            try:
+                discord_id = int(args.get('discord_id'))
+                torn_id = int(args.get('torn_id'))
+            except ValueError:
+                return {'error': 'Discord ID and Torn ID must be int'}, HTTP_400_BAD_REQUEST
 
-        try:
-            create_member(api_key=api_key, discord_id=discord_id, torn_id=torn_id)
-        except TransactionIntegrityError:
-            return {'error': 'API key, Discord ID and/or Torn ID already exists'}, HTTP_400_BAD_REQUEST
+            try:
+                create_member(api_key=api_key, discord_id=discord_id, torn_id=torn_id)
+            except TransactionIntegrityError:
+                return {'error': 'API key, Discord ID and/or Torn ID already exists'}, HTTP_400_BAD_REQUEST
 
-        return {'success': True}
+            return {'success': True}
 
-    else:
-        return {'error': 'Invalid API key'}, HTTP_401_UNAUTHORIZED
+        else:
+            return {'error': 'Invalid API key'}, HTTP_401_UNAUTHORIZED
+
+    return {'error': 'Use POST method to add new records'}, HTTP_400_BAD_REQUEST
 
 
 if __name__ == '__main__':
