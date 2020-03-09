@@ -12,3 +12,6 @@
 
 # DB
 db/*.sqlite
+
+# API keys
+api/keys.py
