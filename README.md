@@ -4,4 +4,4 @@
 
 ---
 
-*Copyright © 2020 Joe Dai / JDTech. All rights reserved.*
+*This project is licensed under the MIT license. For more information, please see [LICENSE](./LICENSE).*
